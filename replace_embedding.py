@@ -14,7 +14,7 @@ key = seed2key(42)
 
 token_new_to_token_id = {}
 
-with open('vocab_mapping.txt', encoding='utf-8') as f:
+with open('outputs/vocab_mapping.txt', encoding='utf-8') as f:
     for line in f:
         token_new, token_id = line.rstrip('\n').rsplit(' ', 1)
         token_id = int(token_id)
@@ -22,8 +22,9 @@ with open('vocab_mapping.txt', encoding='utf-8') as f:
 
 ##########
 
-with open('add_token.txt', encoding='utf-8') as f:
-    new_chars = f.read().rstrip('\n')
+with open('outputs/add_token.txt', encoding='utf-8') as f:
+    #new_chars = f.read().rstrip('\n')
+    new_chars = [line.rstrip() for line in f]
 
 ##########
 
@@ -73,8 +74,8 @@ emb_all = np.vstack(emb_all)
 
 ##########
 
-with open('vocab-bart-base-cantonese.txt', 'w', encoding='utf-8') as f:
+with open('outputs/vocab-bart-base-cantonese.txt', 'w', encoding='utf-8') as f:
     for token in vocab:
         print(token, file=f)
 
-save_params(emb_all, 'embed_params.dat')
+save_params(emb_all, 'outputs/embed_params.dat')

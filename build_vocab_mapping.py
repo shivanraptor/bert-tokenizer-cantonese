@@ -2,7 +2,7 @@ from collections import defaultdict
 from transformers import BertTokenizer
 
 tokenizer = BertTokenizer.from_pretrained('fnlp/bart-base-chinese')
-tokenizer.save_vocabulary('vocab-bart-base-chinese.txt')
+tokenizer.save_vocabulary('outputs/vocab-bart-base-chinese.txt')
 
 from lib import token_id_to_token, token_to_token_id, conv_table, is_alpha_char, is_cjkv
 
@@ -95,6 +95,16 @@ for token_new, candidate_token_ids in token_new_to_candidate_token_ids.items():
             '鍾': '钟',  # 钟锺
             '諮': '咨',  # 咨谘
             '麪': '麺',  # 麺面
+            '钁': '钁', 
+            '託': '託',
+            '穭': '穭', # still raised KeyError
+            '線': '线',
+            '縕': '縕',
+            '蘋': '苹',
+            '蘊': '蕴',
+            '轀': '辒',
+            '醞': '酝',
+            '驄': '骢',
         }
         candidate_token = preferences[token_new]  # guaranteed that `token_new` is always inside `preferences`
         token_id_new = token_to_token_id[candidate_token]
@@ -104,6 +114,6 @@ for token_new, candidate_token_ids in token_new_to_candidate_token_ids.items():
 
     token_new_to_token_id_new.append((token_new, token_id_new))
 
-with open('vocab_mapping.txt', 'w', encoding='utf-8') as f:
+with open('outputs/vocab_mapping.txt', 'w', encoding='utf-8') as f:
     for token_new, token_id_new in token_new_to_token_id_new:
         print(token_new, token_id_new, file=f)

@@ -3,5 +3,5 @@ __pycache__
 *.pyc
 *.dat
 .idea
-*.txt
 *.csv
+.DS_Store
